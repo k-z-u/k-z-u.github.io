@@ -9,7 +9,7 @@
 <meta property="og:title" content="K_Z_U — Portfolio">
 <meta property="og:description" content="macOS アプリ、デスクトップ環境、MCP サーバー、Minecraft サーバー運用。つくった道具の記録。">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/minessh.jpg">
+  <meta property="og:image" content="assets/minessh-kv.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -161,6 +161,18 @@
   .detail-fig .plate { border-radius: 12px; }
   .detail-fig .plate img { height: auto; object-fit: contain; }
   .detail-fig .note { right: -22px; bottom: -22px; max-width: 26ch; }
+  /* ── previews (original screenshots shown under the key visual) ── */
+  .previews { padding-top: 3vh; }
+  .previews .pv-head { font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
+                       text-transform: uppercase; opacity: .5; border-bottom: 1px solid var(--rule-2);
+                       padding-bottom: 10px; display: flex; justify-content: space-between; gap: 16px; }
+  .previews .pv-head span:last-child { opacity: .6; text-transform: none; letter-spacing: .04em;
+                                      font-family: var(--jp); font-size: 11px; }
+  .previews figure { position: relative; margin: 30px 0 0; }
+  .previews figure + figure { margin-top: 7vh; }
+  .previews figure .plate { border-radius: 12px; }
+  .previews figure .plate img { width: 100%; height: auto; object-fit: contain; }
+  .previews figure .note { right: -22px; bottom: -22px; max-width: 26ch; }
   .prose-grid { display: grid; grid-template-columns: .28fr .72fr; gap: 56px; padding: 10vh 0 6vh; align-items: start; }
   .marginnote { font-family: var(--mono); font-size: 10px; line-height: 2; letter-spacing: .04em; opacity: .55; text-align: right; }
   .prose-grid .lede { margin: 0; font-family: var(--jp); font-size: 17px; line-height: 2.2; }
@@ -321,6 +333,8 @@
     <div class="note">fig.01 — <span id="d-caption"></span></div>
   </div>
 
+  <section class="previews" id="d-previews" hidden></section>
+
   <section class="prose-grid">
     <div class="marginnote">傍注 / margin note<br>——<br>設計の判断だけを<br>短く残す。</div>
     <div>
@@ -367,7 +381,7 @@
 const PROJECTS = [
   /* ── featured ───────────────────────────────── */
   { title: "MineSSH", year: "2026.07", role: "設計・実装", stack: "Tauri · Rust · TypeScript",
-    img: "assets/minessh.jpg",
+    img: "assets/minessh.jpg", kv: "assets/minessh-kv.jpg",
     lede: "Minecraft サーバーの更新を、壊さずに終わらせる。",
     caption: "デプロイ前の差分確認",
     body: "Skript は 1 行の書き損じでサーバー全体が黙る。転送する前に検証し、壊れていたら自動で元に戻すところまでを 1 本の macOS アプリにまとめた。手順を覚えていなくても事故が起きない状態を、道具の側でつくっている。",
@@ -376,16 +390,16 @@ const PROJECTS = [
             ["備考", "U-22 プログラミングコンテスト 提出作品"]] },
 
   { title: "Almost", year: "2026.08", role: "設計・実装", stack: "Swift · SwiftUI · macOS",
-    img: "assets/almost.jpg",
+    img: "assets/almost.jpg", kv: "assets/almost-kv.jpg",
     lede: "「あと少し」で止まる制作物を、最後まで運ぶ。",
     caption: "締切と作業フォルダ",
-    body: "タスクではなく、締切と作業フォルダを画面の中心に置いた。残り日数は常に見えていて、3 日を切ると表示が変わり、超えると赤くなる。Finder・ターミナル・エディタはワンクリックで開く。管理するためではなく、手を動かし始めるためのアプリ。",
-    facts: [["形式", "macOS ネイティブアプリ"],
+    body: "タスクではなく、締切と作業フォルダを画面の中心に置いた。残り日数は常に見えていて、3 日を切ると表示が変わり、超えると赤くなる。Finder・ターミナル・エディタはワンクリック。登録したコマンドはアプリ内の zsh で走り、出力は色分けで読める。締切の 7 / 3 / 1 / 0 日前には通知が来る。",
+    facts: [["形式", "macOS ネイティブアプリ（Universal Binary）"],
             ["対象", "コンテスト応募・卒業制作・同人入稿・個人開発"],
-            ["構成", "Almost / AlmostKit の 2 ターゲット"]] },
+            ["備考", "クイックコマンド / 締切通知 / JSON バックアップ / 日英対応"]] },
 
   { title: "OpenCodeX", year: "2026.08", role: "個人開発", stack: "Tauri · React · TypeScript",
-    img: "assets/opencodex.jpg",
+    img: "assets/opencodex.jpg", kv: "assets/opencodex-kv.jpg",
     lede: "ローカルと SSH 先を、ひとつの机の上に。",
     caption: "プロジェクトと作業ルート",
     body: "プロジェクトが複数の作業ルート —— ローカルフォルダと SSH ホスト —— を束ねる。一度開いたルートは温かいまま残り、戻ってきても起動を待たされない。セッション・モデル選択・ツールの動き・権限・差分が、ひとつの面の上に並んでいる。",
@@ -394,7 +408,7 @@ const PROJECTS = [
             ["特徴", "起動済みルートへ再アタッチして待たない"]] },
 
   { title: "EyeVideo", year: "2026.08", role: "個人開発", stack: "Swift · ScreenCaptureKit",
-    img: "assets/eyevideo.jpg",
+    img: "assets/eyevideo.jpg", kv: "assets/eyevideo-kv.jpg",
     lede: "ミスった瞬間に、今のテイクだけ捨てる。",
     caption: "ホットキーと出力設定",
     body: "ゲームをしながら録画して、失敗した瞬間にホットキーを叩くと今のテイクを破棄して即座に録り直しが始まる。キャプチャ自体は一度も止まらない。自動復帰・スリープ抑止・断片書き出し・自動ロールオーバーまで面倒を見る。",
@@ -402,9 +416,54 @@ const PROJECTS = [
             ["基盤", "ScreenCaptureKit + AVAssetWriter"],
             ["特徴", "全画面のゲーム中でも効くグローバルホットキー"]] },
 
+  { title: "N-Helper", year: "2026.08", role: "設計・実装", stack: "React · TypeScript · Cloudflare Workers",
+    img: "assets/nhelp.jpg",
+    lede: "学校の「どこに聞けばいいか」に、まず答える。",
+    caption: "ウェルカム画面と話題チップ",
+    body: "N 高・S 高の生徒向けのヘルパー。Slack の使い方、Times、同好会、各種申請 —— 入り口がわからなくて詰まる質問に答える。回答を生むのは miibo 上の 2 体のエージェント（Mini / High）で、Worker は鍵を一切持たずに中継だけする。miibo の NDJSON の累積値は差分に直して SSE で流す。運ぶ層は薄いまま、判断はエージェント側。",
+    facts: [["形式", "Web アプリ + Electron デスクトップ版"],
+            ["対象", "Slack / Times / 同好会 / 各種申請 / 学校生活"],
+            ["公開", "n-help.myais.workers.dev"]] },
+
   /* ── archive ────────────────────────────────── */
+  { title: "Termry", year: "2026.08", role: "個人開発", stack: "Tauri · Rust · xterm.js",
+    img: "assets/termry.jpg",
+    lede: "ターミナルに、仕事の棚をつくる。",
+    caption: "ワークスペースとクイックコマンド",
+    body: "ワークスペースがプロジェクトごとのタブを束ねる。よく流すコマンドはパネルに置いてワンクリックで入力し、エイリアスと SSH プロファイルも同じ面に並べる。描画は WebGL の xterm —— 重い出力でもスクロールが止まらない。",
+    facts: [["形式", "macOS ターミナルアプリ（Tauri 2）"],
+            ["構成", "ワークスペース / タブ / クイックコマンド / SSH プロファイル"],
+            ["描画", "xterm.js + WebGL アドオン"]] },
+
+  { title: "FileFlow", year: "2026.08", role: "設計・実装", stack: "Swift · SwiftUI · AppKit",
+    img: "assets/fileflow.jpg",
+    lede: "Finder の次に開く、もう一台のファイラー。",
+    caption: "起動直後のホームビュー",
+    body: "タブ、グリッド / テーブル表示、Quick Look、一括リネーム、アーカイブの中身の閲覧まで。検索は構文解析つきのフィルタで、Spotlight と自前インデックスを切り替える。転送はジョブとして積んで、進行と停止をセンターで見る。",
+    facts: [["形式", "macOS ネイティブアプリ（Universal Binary）"],
+            ["検索", "クエリパーサ + ランキング / Spotlight・高速インデックス切替"],
+            ["配布", "DMG"]] },
+
+  { title: "TempShelf", year: "2026.08", role: "個人開発", stack: "Swift · SwiftUI · AppKit",
+    img: "assets/tempshelf.jpg",
+    lede: "「あとで使う」を、すぐ取り出せる場所に。",
+    caption: "一時置き場のメイン画面",
+    body: "テキスト・URL・画像・ファイルを置いて、あとですぐ取り出すためだけの一時置き場。クリップボードの中身を自動で拾うモードもあり、保存期間は 3 時間で勝手に消える。メモ管理も同期もアカウントもない —— 置くことと、取ることだけをする。",
+    facts: [["形式", "macOS アプリ（メニューバー常駐）"],
+            ["対象", "テキスト / URL / 画像 / ファイル"],
+            ["方針", "ローカル完結 / 自動消去 / 日英対応"]] },
+
+  { title: "VideoWallpaper", year: "2026.08", role: "個人開発", stack: "Swift · SwiftUI · AppKit",
+    img: "assets/videowallpaper.jpg",
+    lede: "デスクトップを、動く景色に。",
+    caption: "プレビューと背景への設定",
+    body: "ローカルの動画を選んで、そのままデスクトップアイコンの背面へループ再生させる。バッテリー駆動中は自動で一時停止し、動画が外部へ送られることは一度もない。",
+    facts: [["形式", "macOS ネイティブアプリ"],
+            ["再生", "デスクトップアイコンの背面でループ"],
+            ["配慮", "オフライン完結 / バッテリー時は自動停止"]] },
+
   { title: "MTM", year: "2026.08", role: "個人開発", stack: "Swift · AVFoundation · DSP",
-    img: "assets/mtm.jpg",
+    img: "assets/mtm.jpg", kv: "assets/mtm-kv.jpg",
     lede: "曲を放り込むと、音符ブロックの建造物になる。",
     caption: "採譜結果のピアノロール",
     body: "STFT で倍音を差し引きながら多重音のピッチを推定し、経路探索で旋律と低音を 1 本の線として抜き出す。ドラムは帯域別のスペクトラルフラックで拾う。出力は Minecraft のデータパック —— レッドストーンで実際に演奏される建造物になる。ffmpeg も Homebrew も要らない。",
@@ -479,7 +538,7 @@ const PROJECTS = [
             ["範囲", "今日のみ / 同時実行は 1 件"]] }
 ];
 
-const FEATURED_COUNT = 4;
+const FEATURED_COUNT = 5;
 
 /* ═══ render ════════════════════════════════════ */
 const $  = (s, r = document) => r.querySelector(s);
@@ -496,7 +555,7 @@ function renderIndex() {
       <div class="fig">
         <div class="plate" data-reveal="arch" data-para="${i % 2 === 0 ? "1.05" : "0.95"}"
              style="height:${figH(i)}; border-radius:${radius(i)};">
-          <img src="${esc(p.img)}" alt="${esc(p.title)} のスクリーンショット" loading="lazy" decoding="async">
+          <img src="${esc(p.kv || p.img)}" alt="${esc(p.title)} のキービジュアル" loading="lazy" decoding="async">
         </div>
         <div class="note">fig.0${i + 1} — ${esc(p.caption)}</div>
       </div>
@@ -525,10 +584,24 @@ function renderDetail(i) {
   $("#d-title").textContent   = p.title;
   $("#d-meta").textContent    = p.year + " / " + p.role;
   $("#d-stack").textContent   = p.stack;
-  $("#d-caption").textContent = p.caption;
   $("#d-lede").textContent    = p.lede;
   $("#d-body").textContent    = p.body;
-  $("#d-plate").innerHTML     = `<img src="${esc(p.img)}" alt="${esc(p.title)} のスクリーンショット" decoding="async">`;
+  /* key visual sits at the very top; the plain screenshot drops to a preview below */
+  $("#d-caption").textContent = p.kv ? "key visual" : p.caption;
+  $("#d-plate").innerHTML     = `<img src="${esc(p.kv || p.img)}" alt="${esc(p.title)} のキービジュアル" decoding="async">`;
+  const pv = $("#d-previews");
+  if (p.kv) {
+    pv.hidden = false;
+    pv.innerHTML = `
+      <div class="pv-head"><span>Preview</span><span>実際の画面</span></div>
+      <figure data-reveal="up">
+        <div class="plate"><img src="${esc(p.img)}" alt="${esc(p.title)} のスクリーンショット" loading="lazy" decoding="async"></div>
+        <div class="note">fig.02 — ${esc(p.caption)}</div>
+      </figure>`;
+  } else {
+    pv.hidden = true;
+    pv.innerHTML = "";
+  }
   $("#d-facts").innerHTML = (p.facts || [])
     .map(([k, v]) => `<li><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></li>`).join("");
   $("#d-next-title").textContent = PROJECTS[nx].title;
@@ -626,7 +699,7 @@ document.addEventListener("mouseover", e => {
   const p = PROJECTS[Number(row.dataset.open)];
   if (peek.dataset.for !== row.dataset.open) {
     peek.dataset.for = row.dataset.open;
-    peek.innerHTML = `<img src="${esc(p.img)}" alt="" loading="lazy" decoding="async">`;
+    peek.innerHTML = `<img src="${esc(p.kv || p.img)}" alt="" loading="lazy" decoding="async">`;
   }
   peek.style.opacity = "1";
   peek.style.left = Math.min(innerWidth - 170, e.clientX + 230) + "px";
