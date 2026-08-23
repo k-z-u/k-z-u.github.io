@@ -10,9 +10,11 @@ macOS アプリ、デスクトップ環境、MCP サーバー、Minecraft サー
 ## つくり
 
 - **ビルド不要の静的サイト。** HTML 1 枚と JPEG 23 枚だけ。npm も CDN も使っていません
-- **依存はフォントのみ** — Google Fonts（Instrument Serif / Schibsted Grotesk / Zen Kaku Gothic New / JetBrains Mono）。
+- **依存はフォントのみ** — Google Fonts（Poppins / Zen Kaku Gothic New）。
   読み込めない環境ではシステムフォントに落ちます
 - **ルーティングは JS。** 一覧と詳細を同じページで切り替えます（URL は変わりません）
+- **差し色はプロジェクトごと。** `PROJECTS` の `accent` がその項目の見出し・ボタン・
+  次の作品カードなどに `--ac` として流れ込む。色は各 KV から採った
 
 ```
 index.html          ページ全部（HTML / CSS / データ / スクリプト）
@@ -29,6 +31,16 @@ assets/*.jpg        各プロジェクトの画像。*-kv.jpg はキービジュ
 python3 -m http.server 4173
 ```
 
+## ページ構成
+
+1. **Hero** — 濃紺グラデーション＋緑・藍の光。巨大な `K_Z_U`
+2. **Contents** — 濃紺パネルに Featured 5 件の番号付きリスト（アンカー）
+3. **Work** — Featured 5 件。各プロジェクトは **KV 全面タイトルカード** →
+   リード文・facts・スクショカード。`詳しく見る` で詳細ビューへ
+4. **Archive** — 残り 13 件のサムネカードグリッド
+5. **About** — `Hello!` + スキルタイル + Now / Next + 連絡先
+6. **Footer** — 濃紺。連絡先
+
 ## プロジェクトを足す・直す
 
 `index.html` の `PROJECTS` 配列 1 か所だけ触れば済みます。
@@ -36,11 +48,12 @@ python3 -m http.server 4173
 ```js
 { title: "MineSSH", year: "2026.07", role: "設計・実装", stack: "Tauri · Rust · TypeScript",
   img: "assets/minessh.jpg",
-  kv: "assets/minessh-kv.jpg",                                // キービジュアル（任意）。詳細の最上部と一覧に使う
+  kv: "assets/minessh-kv.jpg",                                // キービジュアル（任意）。タイトルカードと詳細の最上部に使う
+  accent: "#4E9455",                                          // この項目の差し色
   lede: "Minecraft サーバーの更新を、壊さずに終わらせる。",   // 一覧と詳細の見出し下
-  caption: "デプロイ前の差分確認",                            // 図版の傍注（fig.01 — …）
-  body: "…",                                                  // 詳細ページの本文
-  facts: [["形式", "…"], ["中身", "…"]] }                     // 詳細ページの表
+  caption: "デプロイ前の差分確認",                            // スクショカードの注釈
+  body: "…",                                                  // 詳細ビューの本文
+  facts: [["形式", "…"], ["中身", "…"]] }                     // facts テーブル
 ```
 
 - 配列の**上から `FEATURED_COUNT` 件**（現在 5）が Featured、残りが Archive です。
@@ -49,9 +62,9 @@ python3 -m http.server 4173
   ```bash
   sips -s format jpeg -s formatOptions 82 -Z 1800 元画像.png --out assets/名前.jpg
   ```
-- **KV があるプロジェクト**（`kv` フィールドあり）は、詳細ページ最上部に KV を出し、
-  `img` のスクリーンショットはその下の Preview セクションに出る。KV 自体は
-  元サイズ（1672 / 1536px）から上げずに変換する:
+- **KV があるプロジェクト**（`kv` フィールドあり）は、Featured のタイトルカードと
+  詳細ビュー最上部に KV を出し、`img` のスクリーンショットは Preview として下に添える。
+  KV 自体は元サイズ（1672 / 1536px）から上げずに変換する:
   ```bash
   sips -s format jpeg -s formatOptions 82 KV画像.png --out assets/名前-kv.jpg
   ```
@@ -60,13 +73,12 @@ python3 -m http.server 4173
 
 ## 意図的にそうしてあるところ
 
-- **reveal アニメーションは `.js` クラスで囲ってある。**
+- **reveal アニメは `.js` クラスで囲ってある。**
   JS が落ちても本文が `opacity: 0` のまま消えません
 - **タブが裏に回ると IntersectionObserver が止まる**ので、`visibilitychange` で
   もう一度流しています。これがないと「戻ってきたら本文が真っ白」が起きます
-- **図版のアーチは 190px 止まり。** 999px の半円だと UI スクリーンショットの
-  上端を食ってしまうため、弧を残したまま浅くしています
-- 右上のボタンは WebAudio のアンビエント音。既定は off です
+- **明るい KV の上でも白文字が読める**よう、タイトルカードの下側に
+  濃いグラデーションと文字影を重ねてあります
 
 ## 公開
 
@@ -74,5 +86,6 @@ python3 -m http.server 4173
 
 ## クレジット
 
-デザインは Claude Design の "Marginalia" をベースに、静的 HTML として実装し直したもの。
+デザインは Tuoi Bong の Behance ポートフォリオ
+（2D Game Artist PORTFOLIO - Bong, 2024）を参考に、開発者向けの静的 HTML として再構成したもの。
 掲載しているのは自作のプロジェクトのみで、既製品（ComfyUI、Irodori-TTS 本体など）は含みません。
