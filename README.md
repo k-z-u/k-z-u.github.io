@@ -51,7 +51,7 @@ python3 -m http.server 4173
   img: "assets/minessh.jpg",
   kv: "assets/minessh-kv.jpg",                                // キービジュアル（任意）。タイトルカードと詳細の最上部に使う
   accent: "#4E9455",                                          // この項目の差し色
-  lede: "Minecraft サーバーの更新を、壊さずに終わらせる。",   // 一覧と詳細の見出し下
+  lede: "Minecraft サーバーに SSH で安全にデプロイする macOS アプリ。転送前の検証と、失敗時の自動ロールバックを備える。",   // 一覧と詳細の説明文
   caption: "デプロイ前の差分確認",                            // スクショカードの注釈
   body: "…",                                                  // 詳細ビューの本文
   facts: [["形式", "…"], ["中身", "…"]] }                     // facts テーブル

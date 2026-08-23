@@ -435,7 +435,7 @@
 const PROJECTS = [
   { title: "MineSSH", year: "2026.07", role: "設計・実装", stack: "Tauri · Rust · TypeScript",
     img: "assets/minessh.jpg", kv: "assets/minessh-kv.jpg", accent: "#4E9455",
-    lede: "Minecraft サーバーの更新を、壊さずに終わらせる。",
+    lede: "Minecraft サーバーに SSH で安全にデプロイする macOS アプリ。転送前の検証と、失敗時の自動ロールバックを備える。",
     caption: "デプロイ前の差分確認",
     body: "Skript は 1 行の書き損じでサーバー全体が黙る。転送する前に検証し、壊れていたら自動で元に戻すところまでを 1 本の macOS アプリにまとめた。手順を覚えていなくても事故が起きない状態を、道具の側でつくっている。",
     facts: [["形式", "macOS ネイティブアプリ（Universal Binary）"],
@@ -444,7 +444,7 @@ const PROJECTS = [
 
   { title: "Almost", year: "2026.08", role: "設計・実装", stack: "Swift · SwiftUI · macOS",
     img: "assets/almost.jpg", kv: "assets/almost-kv.jpg", accent: "#E8623D",
-    lede: "「あと少し」で止まる制作物を、最後まで運ぶ。",
+    lede: "締切と作業フォルダを中心に管理する macOS アプリ。残り日数の表示、タスク管理、締切通知ができる。",
     caption: "締切と作業フォルダ",
     body: "タスクではなく、締切と作業フォルダを画面の中心に置いた。残り日数は常に見えていて、3 日を切ると表示が変わり、超えると赤くなる。Finder・ターミナル・エディタはワンクリック。登録したコマンドはアプリ内の zsh で走り、出力は色分けで読める。締切の 7 / 3 / 1 / 0 日前には通知が来る。",
     facts: [["形式", "macOS ネイティブアプリ（Universal Binary）"],
@@ -453,7 +453,7 @@ const PROJECTS = [
 
   { title: "OpenCodeX", year: "2026.08", role: "個人開発", stack: "Tauri · React · TypeScript",
     img: "assets/opencodex.jpg", kv: "assets/opencodex-kv.jpg", accent: "#3B44AC",
-    lede: "ローカルと SSH 先を、ひとつの机の上に。",
+    lede: "ローカルフォルダと SSH ホストをまとめて管理できる、コーディングエージェント用のデスクトップアプリ。",
     caption: "プロジェクトと作業ルート",
     body: "プロジェクトが複数の作業ルート —— ローカルフォルダと SSH ホスト —— を束ねる。一度開いたルートは温かいまま残り、戻ってきても起動を待たされない。セッション・モデル選択・ツールの動き・権限・差分が、ひとつの面の上に並んでいる。",
     facts: [["形式", "デスクトップアプリ（dark-first）"],
@@ -462,7 +462,7 @@ const PROJECTS = [
 
   { title: "EyeVideo", year: "2026.08", role: "個人開発", stack: "Swift · ScreenCaptureKit",
     img: "assets/eyevideo.jpg", kv: "assets/eyevideo-kv.jpg", accent: "#E5484D",
-    lede: "ミスった瞬間に、今のテイクだけ捨てる。",
+    lede: "ゲームプレイを録画する macOS アプリ。失敗したテイクだけをホットキー一発で破棄して、すぐ録り直せる。",
     caption: "ホットキーと出力設定",
     body: "ゲームをしながら録画して、失敗した瞬間にホットキーを叩くと今のテイクを破棄して即座に録り直しが始まる。キャプチャ自体は一度も止まらない。自動復帰・スリープ抑止・断片書き出し・自動ロールオーバーまで面倒を見る。",
     facts: [["形式", "macOS 画面録画アプリ"],
@@ -472,7 +472,7 @@ const PROJECTS = [
   { title: "N-Helper", year: "2026.08", role: "設計・実装", stack: "React · TypeScript · Cloudflare Workers",
     img: "assets/nhelp.jpg",
     accent: "#2F6BE0",
-    lede: "学校の「どこに聞けばいいか」に、まず答える。",
+    lede: "N 高・S 高の生徒向けの質問回答サービス。Slack や申請など学校生活の疑問に AI エージェントが答える。",
     caption: "ウェルカム画面と話題チップ",
     body: "N 高・S 高の生徒向けのヘルパー。Slack の使い方、Times、同好会、各種申請 —— 入り口がわからなくて詰まる質問に答える。回答を生むのは miibo 上の 2 体のエージェント（Mini / High）で、Worker は鍵を一切持たずに中継だけする。miibo の NDJSON の累積値は差分に直して SSE で流す。運ぶ層は薄いまま、判断はエージェント側。",
     facts: [["形式", "Web アプリ + Electron デスクトップ版"],
@@ -481,7 +481,7 @@ const PROJECTS = [
 
   { title: "Termry", year: "2026.08", role: "個人開発", stack: "Tauri · Rust · xterm.js",
     img: "assets/termry.jpg", accent: "#17A398",
-    lede: "ターミナルに、仕事の棚をつくる。",
+    lede: "ワークスペースとタブで整理できる macOS ターミナル。よく使うコマンドのワンクリック実行にも対応。",
     caption: "ワークスペースとクイックコマンド",
     body: "ワークスペースがプロジェクトごとのタブを束ねる。よく流すコマンドはパネルに置いてワンクリックで入力し、エイリアスと SSH プロファイルも同じ面に並べる。描画は WebGL の xterm —— 重い出力でもスクロールが止まらない。",
     facts: [["形式", "macOS ターミナルアプリ（Tauri 2）"],
@@ -490,7 +490,7 @@ const PROJECTS = [
 
   { title: "FileFlow", year: "2026.08", role: "設計・実装", stack: "Swift · SwiftUI · AppKit",
     img: "assets/fileflow.jpg", accent: "#3E7DD8",
-    lede: "Finder の次に開く、もう一台のファイラー。",
+    lede: "タブ表示、高速検索、一括リネーム、アーカイブ閲覧などを備えた macOS 用ファイルマネージャ。",
     caption: "起動直後のホームビュー",
     body: "タブ、グリッド / テーブル表示、Quick Look、一括リネーム、アーカイブの中身の閲覧まで。検索は構文解析つきのフィルタで、Spotlight と自前インデックスを切り替える。転送はジョブとして積んで、進行と停止をセンターで見る。",
     facts: [["形式", "macOS ネイティブアプリ（Universal Binary）"],
@@ -499,7 +499,7 @@ const PROJECTS = [
 
   { title: "TempShelf", year: "2026.08", role: "個人開発", stack: "Swift · SwiftUI · AppKit",
     img: "assets/tempshelf.jpg", accent: "#D9932B",
-    lede: "「あとで使う」を、すぐ取り出せる場所に。",
+    lede: "テキストやファイルを一時的に置いておける macOS アプリ。クリップボードの自動取り込みにも対応。",
     caption: "一時置き場のメイン画面",
     body: "テキスト・URL・画像・ファイルを置いて、あとですぐ取り出すためだけの一時置き場。クリップボードの中身を自動で拾うモードもあり、保存期間は 3 時間で勝手に消える。メモ管理も同期もアカウントもない —— 置くことと、取ることだけをする。",
     facts: [["形式", "macOS アプリ（メニューバー常駐）"],
@@ -508,7 +508,7 @@ const PROJECTS = [
 
   { title: "VideoWallpaper", year: "2026.08", role: "個人開発", stack: "Swift · SwiftUI · AppKit",
     img: "assets/videowallpaper.jpg", accent: "#7069D6",
-    lede: "デスクトップを、動く景色に。",
+    lede: "ローカルの動画をデスクトップの壁紙としてループ再生する macOS アプリ。バッテリー駆動時は自動で停止。",
     caption: "プレビューと背景への設定",
     body: "ローカルの動画を選んで、そのままデスクトップアイコンの背面へループ再生させる。バッテリー駆動中は自動で一時停止し、動画が外部へ送られることは一度もない。",
     facts: [["形式", "macOS ネイティブアプリ"],
@@ -517,7 +517,7 @@ const PROJECTS = [
 
   { title: "MTM", year: "2026.08", role: "個人開発", stack: "Swift · AVFoundation · DSP",
     img: "assets/mtm.jpg", kv: "assets/mtm-kv.jpg", accent: "#C08A3E",
-    lede: "曲を放り込むと、音符ブロックの建造物になる。",
+    lede: "音楽ファイルを解析して、Minecraft 内で実際に演奏されるデータパックに変換する macOS アプリ。",
     caption: "採譜結果のピアノロール",
     body: "STFT で倍音を差し引きながら多重音のピッチを推定し、経路探索で旋律と低音を 1 本の線として抜き出す。ドラムは帯域別のスペクトラルフラックで拾う。出力は Minecraft のデータパック —— レッドストーンで実際に演奏される建造物になる。ffmpeg も Homebrew も要らない。",
     facts: [["形式", "macOS アプリ（Music to Minecraft）"],
@@ -526,7 +526,7 @@ const PROJECTS = [
 
   { title: "Premiere Pro MCP", year: "2026.08", role: "設計・実装", stack: "TypeScript · UXP · WebSocket",
     img: "assets/premiere-mcp.jpg", accent: "#8B5CF6",
-    lede: "編集の判断は人間、反映だけを機械に。",
+    lede: "Premiere Pro を MCP 経由で操作できるようにするプラグインとサーバー。タイムラインへの配置を自動化する。",
     caption: "UXP パネルと MCP サーバー",
     body: "Premiere Pro 2026 が CEP 拡張を読まなくなったので、UXP パネルとして作り直した。MCP クライアントからの指示を WebSocket でパネルへ渡し、タイムラインに正確に置くだけの層に徹している。判断まで機械に渡すと編集は必ず崩れる。",
     facts: [["形式", "MCP サーバー + Premiere Pro UXP プラグイン"],
@@ -535,7 +535,7 @@ const PROJECTS = [
 
   { title: "SuperRock", year: "2026.07", role: "個人開発", stack: "Swift · Manifest V3",
     img: "assets/superrock.jpg", accent: "#52607A",
-    lede: "決めた時間だけ、決めたものしか開けない。",
+    lede: "決めた時間だけ指定のアプリやサイトをブロックする、macOS アプリとブラウザ拡張のセット。",
     caption: "セッション開始前の設定",
     body: "許可するアプリと許可するドメインを先に選んでから始める。アプリを強制終了しても拡張機能は終了時刻まで遮断を続ける（fail-closed）。解除はボタンを 5 秒間押しっぱなし —— うっかりでは解けない。同じ思想で 3 通りの実装を試している。",
     facts: [["形式", "macOS アプリ + Chrome / Edge 拡張"],
@@ -544,7 +544,7 @@ const PROJECTS = [
 
   { title: "Blockbench Agent", year: "2026.07", role: "設計・実装", stack: "TypeScript · MCP",
     img: "assets/blockbench.jpg", accent: "#159A87",
-    lede: "日本語で頼むと、Minecraft のモデルができる。",
+    lede: "Blockbench を日本語の指示で操作できるようにする MCP プラグイン。モデリングやテクスチャ描画を自動化。",
     caption: "AGENT パネル",
     body: "Blockbench にプラグインとして常駐し、MCP 経由でモデリング操作を受け取る。キューブの生成、UV、テクスチャのペイント、アニメーションのキーフレーム、ターンテーブルのレンダリングまで。GUI を触る代わりに言葉で指示する。",
     facts: [["形式", "Blockbench プラグイン + MCP サーバー"],
@@ -552,7 +552,7 @@ const PROJECTS = [
 
   { title: "Irodori Bridge", year: "2026.08", role: "実装", stack: "TypeScript · MCP",
     img: "assets/irodori.jpg", accent: "#E05C7A",
-    lede: "台本から声を作って、そのまま尺に合わせる。",
+    lede: "台本テキストから音声を生成し、実測の長さを添えて Premiere Pro に配置する MCP サーバー。",
     caption: "読みの確認と生成",
     body: "人間が書いた script.md から読み仮名つきの narration.txt を起こし、音声を生成し、実測した長さつきの manifest を Premiere Pro MCP に渡す。台本は人間の文書のままで、こちらからは絶対に書き換えない。",
     facts: [["形式", "MCP サーバー"],
@@ -560,7 +560,7 @@ const PROJECTS = [
 
   { title: "YouDL", year: "2026.07", role: "個人開発", stack: "Tauri · Rust · React",
     img: "assets/youdl.jpg", accent: "#C21F2E",
-    lede: "自分の権利がある動画を、手元に高画質で。",
+    lede: "yt-dlp に GUI を被せた動画ダウンロードアプリ。自分の権利がある動画の取得向け。",
     caption: "同梱コンポーネントの確認",
     body: "yt-dlp・FFmpeg・Deno を sidecar として同梱し、初回に SHA-256 つきのロックファイルへ記録する。次回からはハッシュ照合だけで済む。環境構築を利用者に押しつけない、という一点のために作った。",
     facts: [["形式", "デスクトップアプリ"],
@@ -568,7 +568,7 @@ const PROJECTS = [
 
   { title: "Vega IME", year: "2026.08", role: "プロトタイプ", stack: "Swift · InputMethodKit",
     img: "assets/vega-ime.jpg", accent: "#B83280",
-    lede: "毎日いちばん長く見る窓を、自分で作る。",
+    lede: "macOS 用日本語インプットメソッドの試作品。候補ウィンドウのデザインをコードで描画している。",
     caption: "候補ウィンドウのガラス",
     body: "macOS 用日本語インプットメソッドの試作。候補ウィンドウは NSVisualEffectView のブラーの上に、色ティント・内側ハイライト・アクセントのブルームを重ねている。アイコンもグローもコード側に描画のフォールバックがあり、画像アセットは 1 枚も必須ではない。",
     facts: [["形式", "macOS IME（AppKit / InputMethodKit）"],
@@ -576,7 +576,7 @@ const PROJECTS = [
 
   { title: "Leave", year: "2026.08", role: "個人開発", stack: "Swift · CoreLocation",
     img: "assets/leave.jpg", accent: "#2E8B74",
-    lede: "置き忘れは、たいてい手遅れになってから気づく。",
+    lede: "登録した場所を出るときに、その場所専用の持ち物リストを通知してくれる iOS アプリ。",
     caption: "場所ごとの持ち物リスト",
     body: "登録した場所の半径を出入りしたタイミングを検知して、その場所専用の持ち物チェックリストをそっと出す iOS アプリ。会社を出るとき、保育園を出るとき、カフェを出るとき。すべて端末内で完結し、アカウントもクラウド同期も課金もない。",
     facts: [["形式", "iOS アプリ"],
@@ -584,7 +584,7 @@ const PROJECTS = [
 
   { title: "MyAi", year: "2026.07", role: "個人開発", stack: "TypeScript",
     img: "assets/myai.jpg", accent: "#5A67D8",
-    lede: "自分を 1 体のエージェントとして扱ってみる。",
+    lede: "今日のタスクをエージェントの実行キューのように管理するブラウザツール。すべてローカルで完結。",
     caption: "実行キュー",
     body: "今日ぶんだけのタスクを、エージェントの実行ダッシュボードのように扱う。追加したタスクはジョブとしてキューに入り、走り、止まり、完了し、失敗する。ライブタイマーと effort と作業ログつき。すべてブラウザのローカルに置く。",
     facts: [["形式", "Web アプリ（localStorage 完結）"],
