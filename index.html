@@ -100,6 +100,28 @@
   .sec-head .cnt { margin-left: auto; font-family: var(--sans); font-weight: 600;
                    font-size: 11px; letter-spacing: .22em; color: var(--muted); text-transform: uppercase; }
 
+  /* ── index table ─────────────────────────────── */
+  .index-list { margin-top: 28px; border-top: 2px solid var(--ink); }
+  .irow { display: grid; grid-template-columns: 44px 1.15fr 1.55fr 1fr 62px 22px;
+          gap: 18px; align-items: center; padding: 15px 10px;
+          border-bottom: 1px solid var(--line); cursor: pointer;
+          transition: background .25s, padding-left .25s; }
+  .irow:hover { background: #fff; padding-left: 20px; }
+  .irow .n { font-family: var(--sans); font-weight: 600; font-size: 11px; color: var(--muted); }
+  .irow .t { font-family: var(--sans); font-weight: 600; font-size: 16px;
+             display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .irow .t i { width: 8px; height: 8px; border-radius: 50%; background: var(--ac); flex: none; }
+  .irow .d { font-size: 12.5px; color: var(--body); line-height: 1.6;
+             white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .irow .s { font-family: var(--sans); font-weight: 500; font-size: 10.5px;
+             letter-spacing: .05em; color: var(--muted);
+             white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .irow .y { font-family: var(--sans); font-weight: 500; font-size: 11px;
+             color: var(--muted); text-align: right; }
+  .irow .arr { font-family: var(--sans); font-weight: 700; font-size: 15px;
+               color: var(--ac); opacity: 0; transition: opacity .25s; }
+  .irow:hover .arr { opacity: 1; }
+
   /* ── featured ────────────────────────────────── */
   .feat { padding-top: 78px; }
   .feat-hero { position: relative; border-radius: 26px; overflow: hidden;
@@ -240,6 +262,8 @@
   /* ── narrow ──────────────────────────────────── */
   @media (max-width: 900px) {
     .contents { grid-template-columns: 1fr; padding: 40px 30px; gap: 26px; }
+    .irow { grid-template-columns: 32px 1fr 54px 16px; gap: 12px; }
+    .irow .d, .irow .s { display: none; }
     .feat-body { grid-template-columns: 1fr; gap: 30px; padding-top: 30px; }
     .about-grid { grid-template-columns: 1fr; gap: 44px; }
     .sec-head { padding-top: 72px; }
@@ -274,6 +298,7 @@
   <div class="nav-in">
     <a class="mark" href="#top" data-home>K_Z<i>_</i>U</a>
     <div class="nav-links">
+      <a href="#index" data-nav>Index</a>
       <a href="#work" data-nav>Work</a>
       <a href="#archive" data-nav>Archive</a>
       <a href="#about" data-nav>About</a>
@@ -302,9 +327,17 @@
     <section class="contents" data-rv aria-label="目次">
       <div>
         <h2>CONTENTS</h2>
-        <p class="cap">上の 5 つは主力作品。残りは Archive にまとめてあります。気になった行からどうぞ。</p>
+        <p class="cap">上の 5 つは主力作品。全 18 件の速見表は、この下の Index。</p>
       </div>
       <ol id="contents-list"></ol>
+    </section>
+
+    <section id="index">
+      <div class="sec-head" data-rv>
+        <h2>INDEX</h2>
+        <span class="cnt" id="index-count"></span>
+      </div>
+      <div class="index-list" id="index-list"></div>
     </section>
 
     <section id="work">
@@ -587,6 +620,17 @@ function renderHome() {
         <span class="y">${esc(p.year)}</span>
       </a>
     </li>`).join("");
+
+  $("#index-count").textContent = `${PROJECTS.length} apps`;
+  $("#index-list").innerHTML = PROJECTS.map((p, i) => `
+    <div class="irow" data-open="${i}" style="--ac:${p.accent}" data-rv>
+      <span class="n">${String(i + 1).padStart(2, "0")}</span>
+      <span class="t"><i aria-hidden="true"></i>${esc(p.title)}</span>
+      <span class="d">${esc(p.lede)}</span>
+      <span class="s">${esc(p.stack)}</span>
+      <span class="y">${esc(p.year)}</span>
+      <span class="arr" aria-hidden="true">→</span>
+    </div>`).join("");
 
   $("#work-count").textContent = `${F.length} projects`;
   $("#arch-count").textContent = `${R.length} projects`;
