@@ -327,7 +327,7 @@
     <section class="contents" data-rv aria-label="目次">
       <div>
         <h2>CONTENTS</h2>
-        <p class="cap">上の 5 つは主力作品。全 18 件の速見表は、この下の Index。</p>
+        <p class="cap">上の 5 つは主力作品。全 28 件の速見表は、この下の Index。</p>
       </div>
       <ol id="contents-list"></ol>
     </section>
@@ -588,7 +588,97 @@ const PROJECTS = [
     caption: "実行キュー",
     body: "今日ぶんだけのタスクを、エージェントの実行ダッシュボードのように扱う。追加したタスクはジョブとしてキューに入り、走り、止まり、完了し、失敗する。ライブタイマーと effort と作業ログつき。すべてブラウザのローカルに置く。",
     facts: [["形式", "Web アプリ（localStorage 完結）"],
-            ["範囲", "今日のみ / 同時実行は 1 件"]] }
+            ["範囲", "今日のみ / 同時実行は 1 件"]] },
+
+  { title: "Nikki", year: "2026.08", role: "設計・実装", stack: "Next.js · React · Cloudflare",
+    img: "assets/nikki.jpg", accent: "#2E7D52",
+    lede: "N 中等部の月次日誌を、スマホや PC の Web UI から記入できるアプリ。元のスプレッドシートの書式はそのまま保つ。",
+    caption: "ランディングと使い方",
+    body: "Google Picker で自分が選んだ日誌だけを drive.file スコープで読み書きする。セル位置は固定せず、見出しから毎回スキーマを組み立てて、対応する値セルだけを batchUpdate で更新する。質問モードでは AI がインタビュアーとして対話的に深掘りし、「やったこと／振り返り／次回やること」の下書きまで作る。保存直前の再解析、数式セルの拒否、同時編集の競合検知まで備える。",
+    facts: [["形式", "Web アプリ（PWA manifest）"],
+            ["連携", "Google OAuth + Picker + Sheets API"],
+            ["特徴", "元シートの書式と数式を壊さない"]] },
+
+  { title: "PaperTrade", year: "2026.08", role: "設計・実装", stack: "React · Cloudflare Workers · D1",
+    img: "assets/papertrade.jpg", accent: "#356B54",
+    lede: "仮想 100 万円と実際の市場データで株式投資の基本を学ぶ教育ゲーム。実際のお金は一切扱わない。",
+    caption: "口座をつくる画面",
+    body: "残高も株数も約定価格も、すべてサーバー側で決まる。D1 トリガーによる原子的な注文処理、冪等キーによる二重注文防止、東証の前場・後場の判定、チャートと取引履歴、シーズン別ランキングまで。13 段階のチュートリアルと 30 語の用語辞典を同梱し、投資助言は AI 側とアプリ側の両方で拒否する。",
+    facts: [["形式", "Web アプリ（React SPA + Worker + D1）"],
+            ["公開", "papertrade.myais.workers.dev"],
+            ["安全設計", "実在の金融商品・証券口座アクセスなし"]] },
+
+  { title: "qzjs.js", year: "2026.08", role: "個人開発", stack: "TypeScript · Vite",
+    img: "assets/qzjs.jpg", accent: "#2563EB",
+    lede: "専用構文で書いたクイズを貼るだけで動く、ブラウザ完結の学習クイズエンジン。",
+    caption: "構文を貼り付ける入口",
+    body: "@choice / @input / @order の専用構文を貼り付けるだけで、1 問ずつの採点・解説・分野別の正答集計・復習リストが動く。結果は AI にそのまま貼れるテキストで出力して、解説と次の問題を作ってもらえる。入力は localStorage のみ、描画は textContent 経由のみの XSS 安全設計。完全静的でサーバー不要。",
+    facts: [["形式", "静的ライブラリ + デモページ"],
+            ["公開", "k-z-u.github.io/qzjs.js"],
+            ["特徴", "AI へ渡す結果出力（result.toAIText）"]] },
+
+  { title: "Chrous", year: "2026.08", role: "個人開発", stack: "React · TypeScript · Vite",
+    img: "assets/chrous.jpg", accent: "#0A63FF",
+    lede: "青の澄んだ UI で Gemini を動かす AI チャット。API キーを入れるだけで使える。",
+    caption: "初回起動のキー登録",
+    body: "使うのに必要なのは Gemini の API キー 1 つ。キーはブラウザの中だけに保存して、そのまま Gemini へつなぐ。サーバーを持たない静的な 1 ページとして動くので、置いておく場所を選ばない。",
+    facts: [["形式", "静的 Web アプリ"],
+            ["対応", "Gemini API"],
+            ["方針", "キーはローカル保存のみ / サーバーなし"]] },
+
+  { title: "言い方トランスフォーム", year: "2026.08", role: "設計・実装", stack: "Next.js · React · Gemini",
+    img: "assets/iikata.jpg", accent: "#A8432A",
+    lede: "同じ用件でも相手が変われば「ちょうどいい言い方」は変わる。自分の文を並べて確かめる国語・コミュニケーション学習アプリ。",
+    caption: "ことばのものさし",
+    body: "お題の場面を、選んだ相手（ともだち／先生／目上の大人…）に言うつもりで言い換えると、AI がその相手本人としてリアクションし、4 つの学習軸で採点してお手本とことばのポイントを返す。同じお題のまま相手を変えると、自分の文とお手本が「ことばのものさし」の上に丁寧さ順で並び、言い方の変化がそのまま見える。",
+    facts: [["形式", "Web アプリ"],
+            ["評価", "4 つの学習軸 + ことばのものさし"],
+            ["比較", "同じお題 × 別の相手で並べて見る"]] },
+
+  { title: "ARCHER'S PATH", year: "2026.08", role: "個人開発", stack: "Three.js · TypeScript · Vite",
+    img: "assets/archerspath.jpg", accent: "#6B8F3D",
+    lede: "ブラウザで遊べる 3D のアーチェリー + 剣術ゲーム。アセットはすべてプロシージャル生成。",
+    caption: "射撃場の平原",
+    body: "弓は長押しで引き、放った矢は重力に従う。コインを稼いで装備を整え、レイダーを剣で切り開いてボスまで進む。モデルもテクスチャも音も外部ファイルを 1 つも使わず、すべてコードから生やしている。起動から勝利までをヘッドレスの自動テストで検証する。",
+    facts: [["形式", "ブラウザゲーム（Three.js）"],
+            ["アセット", "すべてプロシージャル生成"],
+            ["テスト", "Puppeteer で進行を自動検証"]] },
+
+  { title: "Bow & Blade", year: "2026.08", role: "個人開発", stack: "Three.js · Vite",
+    img: "assets/bowblade.jpg", accent: "#C9A227",
+    lede: "平原で弓を放ち、コインを稼ぎ、刃で道を切り開く 3D アクション。",
+    caption: "弓と刃のタイトル",
+    body: "弓は左クリックの長押しで引き、剣は 3 連コンボで振るう。WASD で平原を駆け、レイダーを狩って集めた黄金はショップで剣と弓に換える。Three.js 製で、ブラウザのまま遊べる。",
+    facts: [["形式", "ブラウザゲーム（Three.js）"],
+            ["操作", "弓の長押し + 3 連コンボの剣"],
+            ["ショップ", "剣・弓の購入"]] },
+
+  { title: "ASCENT", year: "2026.08", role: "個人開発", stack: "JavaScript · Voxel",
+    img: "assets/ascent.jpg", accent: "#D9A441",
+    lede: "地上から世界の頂へ登る、一人称のボクセル探索アスレチック。ヘッドオン推奨。",
+    caption: "タイトルと操作",
+    body: "ブロックを壊し、置き、足場を組みながら世界のてっぺんを目指す。チェックポイントが道しるべになり、黄色い矢印が次の場所を示す。進行は自動セーブ。ピクセル風の描画に、エリア名がゆっくり浮かぶ演出。",
+    facts: [["形式", "ブラウザゲーム"],
+            ["操作", "壊す / 置く / ジャンプ / ダッシュ"],
+            ["セーブ", "自動"]] },
+
+  { title: "字幕メモ for YouTube", year: "2026.08", role: "個人開発", stack: "Chrome Extension · MV3",
+    img: "assets/jimakumemo.jpg", accent: "#D93636",
+    lede: "開いている YouTube 動画の字幕をタイムスタンプ付きで取得し、そのままコピー・保存できる Chrome 拡張。",
+    caption: "サイドパネル",
+    body: "高評価ボタンの左にある「字幕メモ」からサイドパネルが開く。字幕の行をクリックするとそのシーンへジャンプし、再生中のセリフをハイライトしてリストも追従する。チャプター / SRT / TXT の 3 形式で書き出し、必要な行だけチェックしての部分書き出しにも対応する。",
+    facts: [["形式", "Chrome 拡張（サイドパネル）"],
+            ["書き出し", "チャプター / SRT / TXT"],
+            ["特徴", "クリックでシーク・同期スクロール・検索"]] },
+
+  { title: "ハドル読み上げ君", year: "2026.08", role: "個人開発", stack: "Chrome Extension · VOICEVOX",
+    img: "assets/huddletts.jpg", accent: "#0D5CD6",
+    lede: "Slack の新着メッセージをローカル VOICEVOX で読み上げ、ハドルの送信音声として流す Chrome 拡張。",
+    caption: "ポップアップの設定",
+    body: "Slack Bot も Slack App も使わない。拡張機能だけで完結して、新着投稿を MutationObserver で拾い、VOICEVOX で合成し、自分のマイク音声とミックスしてハドルの送信トラックへ注入する。話速、声の選択、「名前、本文」の形式、コードを読み飛ばす設定までポップアップから決められる。",
+    facts: [["形式", "Chrome 拡張 + ローカル Gateway"],
+            ["音声", "VOICEVOX（ローカル合成）"],
+            ["特徴", "Bot・App 登録なしでハドルへ音声注入"]] }
 ];
 
 const FEATURED_COUNT = 5;
